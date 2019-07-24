@@ -19,6 +19,14 @@ ENV GOPATH ${HOME}/go
 ENV PATH "${GOPATH}/bin:${GO_BASE_PATH}/bin:${PATH}"
 ENV CGO_ENABLED 0
 
+# Install some test helpers
+
+RUN go get gotest.tools/gotestsum
+RUN go get github.com/tebeka/go2xunit
+RUN go get github.com/axw/gocov/gocov
+RUN go get github.com/AlekSi/gocov-xml
+RUN go get github.com/matm/gocov-html
+
 # Test binaries
 
 RUN make --version
@@ -28,6 +36,12 @@ RUN curl --version
 RUN cf version
 
 RUN go version
+
+RUN gotestsum --version
+RUN go2xunit -version
+RUN which gocov
+RUN which gocov-xml
+RUN which gocov-html
 
 WORKDIR ${HOME}
 
