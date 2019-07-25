@@ -13,11 +13,13 @@ USER jenkins
 ARG GO_BASE_PATH=/usr/local/go
 
 COPY --from=gosrc ${GO_BASE_PATH} ${GO_BASE_PATH}
-COPY --from=gosrc /go ${HOME}/go
+COPY --from=gosrc /go /go
 
-ENV GOPATH ${HOME}/go
+ENV GOPATH /go
 ENV PATH "${GOPATH}/bin:${GO_BASE_PATH}/bin:${PATH}"
 ENV CGO_ENABLED 0
+
+ENV mkdir -p $GOPATH
 
 # Install some test helpers
 
@@ -39,9 +41,12 @@ RUN go version
 
 RUN gotestsum --version
 RUN go2xunit -version
+RUN which go
 RUN which gocov
 RUN which gocov-xml
 RUN which gocov-html
+
+RUN ls -al $GOPATH/bin
 
 WORKDIR ${HOME}
 
