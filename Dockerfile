@@ -4,16 +4,18 @@ FROM jenkins/jnlp-slave:alpine
 
 USER root
 
-RUN apk --update add sudo git curl make gcc musl-dev g++
+RUN apk --update add git curl make gcc musl-dev g++
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing cloudfoundry-cli
 RUN rm -rf /var/cache/apk/* 
-
-USER jenkins
 
 ARG GO_BASE_PATH=/usr/local/go
 
 COPY --from=gosrc ${GO_BASE_PATH} ${GO_BASE_PATH}
 COPY --from=gosrc /go /go
+
+RUN chown -R jenkins:jenkins /go
+
+USER jenkins
 
 ENV GOPATH /go
 ENV PATH "${GOPATH}/bin:${GO_BASE_PATH}/bin:${PATH}"
