@@ -1,4 +1,4 @@
-FROM golang:alpine as gosrc
+FROM golang:1.13-alpine as gosrc
 
 FROM jenkins/jnlp-slave:alpine
 
@@ -23,13 +23,14 @@ ENV CGO_ENABLED 0
 
 ENV mkdir -p $GOPATH
 
-# Install some test helpers
+# Install some tools
 
-RUN go get gotest.tools/gotestsum
-RUN go get github.com/tebeka/go2xunit
-RUN go get github.com/axw/gocov/gocov
-RUN go get github.com/AlekSi/gocov-xml
-RUN go get github.com/matm/gocov-html
+RUN go get -u github.com/go-task/task/cmd/task
+RUN go get -u gotest.tools/gotestsum
+RUN go get -u github.com/tebeka/go2xunit
+RUN go get -u github.com/axw/gocov/gocov
+RUN go get -u github.com/AlekSi/gocov-xml
+RUN go get -u github.com/matm/gocov-html
 
 # Test binaries
 
