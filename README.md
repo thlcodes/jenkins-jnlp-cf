@@ -1,3 +1,3 @@
 # jenkins-jnlp-cf:go
 
-With go 1.12
+With go 1.13
