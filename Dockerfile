@@ -51,6 +51,6 @@ RUN which gocov-html
 
 RUN ls -al $GOPATH/bin
 
-WORKDIR ${HOME}
+WORKDIR $HOME
 
 LABEL maintainer="thomas.liebeskind@gmail.com"
