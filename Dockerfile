@@ -1,4 +1,4 @@
-FROM golang:1.13-alpine as gosrc
+FROM golang:1.14.4-alpine as gosrc
 
 FROM jenkins/jnlp-slave:alpine
 
@@ -20,6 +20,10 @@ USER jenkins
 ENV GOPATH /go
 ENV PATH "${GOPATH}/bin:${GO_BASE_PATH}/bin:${PATH}"
 ENV CGO_ENABLED 0
+
+ENV GONOPROXY "true"
+ENV GONOSUMDB "true"
+ENV GOPROXY "direct"
 
 ENV mkdir -p $GOPATH
 
