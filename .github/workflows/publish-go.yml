@@ -8,10 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
     - uses: actions/checkout@v2
     - name: Build the Docker image
       uses: docker/build-push-action@v1.1.1
       with:
         username: thlcodes
         password: ${{ secrets.DOCKER_PW }}
-        tags: ${{ github.ref }}
+        tags: ${{ steps.extract_branch.outputs.branch }}
