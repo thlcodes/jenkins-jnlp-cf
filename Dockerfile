@@ -1,4 +1,4 @@
-FROM golang:1.14.4-alpine as gosrc
+FROM golang:1.15.2-alpine as gosrc
 
 FROM jenkins/jnlp-slave:alpine
 
