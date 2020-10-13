@@ -55,6 +55,7 @@ RUN which gocov-html
 
 RUN ls -al $GOPATH/bin
 
+ENV HOME "/home/jenkins"
 WORKDIR $HOME
 
 LABEL maintainer="thomas.liebeskind@gmail.com"
