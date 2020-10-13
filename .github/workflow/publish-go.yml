@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ go* ]
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      uses: docker/build-push-action@v1.1.1
+      with:
+        username: thlcodes
+        password: ${{ secrets.DOCKER_PW }}
+        tags: ${{ github.ref }}
